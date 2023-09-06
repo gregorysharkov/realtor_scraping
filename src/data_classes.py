@@ -16,4 +16,30 @@ class Deal:
         price = float(price)
 
         deal_date = re.sub('Sold - ', '', self.raw_date).strip()
-        return [self.link, price, deal_date, self.raw_address]
+        return [
+            self.link, price, deal_date,
+            self.street_address, self.city, self.state, self.zip,
+        ]
+
+    @property
+    def zip(self):
+        return
+
+    @property
+    def street_address(self):
+        return self.raw_address.split(',')[0]
+
+    @property
+    def zip(self):
+        return self.raw_address.split(',')[-1]\
+            .strip()[-5:]
+
+    @property
+    def state(self):
+        return self.raw_address.split(',')[-1]\
+            .strip()[:-6]
+
+    @property
+    def city(self):
+        return self.raw_address.split(',')[1]\
+            .strip()

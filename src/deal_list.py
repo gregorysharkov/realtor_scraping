@@ -1,3 +1,4 @@
+import random
 import re
 from functools import cache
 from typing import Dict, List
@@ -22,7 +23,7 @@ class DealList:
     def fetch_page_content(self) -> None:
         '''send post request to the server'''
         self.page_content = ru.get_page_content(
-            self.link, self.header
+            self.link, self.header, random.uniform(.1, 1.5)
         )  # type: ignore
 
     @property

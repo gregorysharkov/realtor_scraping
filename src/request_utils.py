@@ -1,6 +1,7 @@
 '''helper functions to make requests'''
 
 import logging
+import random
 import re
 from typing import Any, Dict, Union
 
@@ -25,11 +26,12 @@ def check_link(url: str) -> str:
     return url
 
 
-def get_page_content(url: str, header: Dict) -> Union[str, Any]:
+def get_page_content(url: str, header: Dict, timeout: float = None) -> Union[str, Any]:
     '''gets content from a page'''
 
     try:
-        response = requests.get(url, headers=header, verify=False)
+        response = requests.get(url, headers=header,
+                                verify=False)
         return response.content.decode()  # type:ignore
     except ConnectionError:
         return None
